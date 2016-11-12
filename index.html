@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Vscode-ios-web-debug by YOTOV-LIMITED</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Vscode-ios-web-debug</h1>
+      <h2 class="project-tagline">Debug your JavaScript code running in Safari on iOS devices from VS Code.</h2>
+      <a href="https://github.com/YOTOV-LIMITED/vscode-ios-web-debug" class="btn">View on GitHub</a>
+      <a href="https://github.com/YOTOV-LIMITED/vscode-ios-web-debug/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/YOTOV-LIMITED/vscode-ios-web-debug/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1 align="center">
+<a id="----------vs-code---debugger-for-ios-web----" class="anchor" href="#----------vs-code---debugger-for-ios-web----" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+  <br>
+    <img src="https://cdn.rawgit.com/Microsoft/vscode-ios-web-debug/master/.readme/icon.png" alt="logo" width="200">
+  <br>
+  VS Code - Debugger for iOS Web
+  <br>
+  <br>
+</h1>
+
+<h4 align="center">
+<a id="debug-your-javascript-code-running-in-safari-on-ios-devices-from-vs-code" class="anchor" href="#debug-your-javascript-code-running-in-safari-on-ios-devices-from-vs-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Debug your JavaScript code running in Safari on iOS devices from VS Code.</h4>
+
+<p align="center">
+  <a href="https://travis-ci.com/Microsoft/vscode-ios-web-debug"><img src="https://travis-ci.com/Microsoft/vscode-ios-web-debug.svg?token=WQL8U9tKa9M9yQmjXHTp" alt="Travis"></a>
+  <a href="https://github.com/microsoft/vscode-ios-web-debug/releases"><img src="https://img.shields.io/github/release/Microsoft/vscode-ios-web-debug.svg" alt="Release"></a>
+</p>
+
+<p>The VS Code iOS Web Debugger allows to debug your JavaScript code running in Safari on iOS devices (and iOS Simulators) from VS Code both on <strong>Windows and Mac</strong> without addtional tools.</p>
+
+<p><img src="https://cdn.rawgit.com/Microsoft/vscode-ios-web-debug/master/.readme/demo.gif" alt=""></p>
+
+<p><strong>Supported features</strong></p>
+
+<ul>
+<li>Setting breakpoints, including in source files when source maps are enabled</li>
+<li>Stepping</li>
+<li>Stack traces</li>
+<li>Locals</li>
+<li>Debugging eval scripts, script tags, and scripts that are added dynamically</li>
+<li>Watches</li>
+<li>Console</li>
+<li>Virtual port forwarding via HTTP tunnel from local computer.</li>
+</ul>
+
+<p><strong>Unsupported scenarios</strong></p>
+
+<ul>
+<li>Debugging web workers</li>
+<li>Any features that aren't script debugging.</li>
+</ul>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>Before you use the debugger you need to make sure you have the <a href="http://www.apple.com/itunes/download/">latest version of iTunes</a> installed, as we need a few libraries provided by iTunes to talk to the iOS devices.</p>
+
+<h4>
+<a id="windows" class="anchor" href="#windows" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Windows</h4>
+
+<p>Nothing to do as there is a proxy included with the extension from the <code>vs-libimobile</code> npm package</p>
+
+<h4>
+<a id="osxmac" class="anchor" href="#osxmac" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>OSX/Mac</h4>
+
+<p>Make sure you have Homebrew installed, and run the following command to install <a href="https://github.com/google/ios-webkit-debug-proxy">ios-webkit-debug-proxy</a></p>
+
+<pre><code>brew install ios-webkit-debug-proxy
+</code></pre>
+
+<h4>
+<a id="ios-device" class="anchor" href="#ios-device" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>iOS Device</h4>
+
+<p>On your iOS device then go to <code>Settings &gt; Safari &gt; Advanced</code>, and enable the <code>Web Inspector</code> option.</p>
+
+<h2>
+<a id="using-the-debugger" class="anchor" href="#using-the-debugger" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using the debugger</h2>
+
+<p>When your launch config is set up, you can debug your project! Pick a launch config from the dropdown on the Debug pane in Code. Press the play button or F5 to start.</p>
+
+<h3>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h3>
+
+<p>The extension operates in two modes - it can <code>launch</code> a URL in Safari on the device, or it can <code>attach</code> to a running tab inside Safari. Just like when using the Node debugger, you configure these modes with a <code>.vscode/launch.json</code> file in the root directory of your project. You can create this file manually, or Code will create one for you if you try to run your project, and it doesn't exist yet.</p>
+
+<p>To use this extension, you must first open the folder containing the project you want to work on.</p>
+
+<h4>
+<a id="launch" class="anchor" href="#launch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Launch</h4>
+
+<p>Two example <code>launch.json</code> configs. You must specify either <code>file</code> or <code>url</code> to launch Chrome against a local file or a url. If you use a url, set <code>webRoot</code> to the directory that files are served from. This can be either an absolute path or a path relative to the workspace (the folder open in Code). It's used to resolve urls (like "http://localhost/app.js") to a file on disk (like "/users/me/project/app.js"), so be careful that it's set correctly.</p>
+
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>version<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.1.0<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>configurations<span class="pl-pds">"</span></span>: [
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>iOS - Launch localhost with sourcemaps<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>ios<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>request<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>launch<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>port<span class="pl-pds">"</span></span>: <span class="pl-c1">9222</span>,
+            <span class="pl-s"><span class="pl-pds">"</span>url<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://dev.domain.com/<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>webRoot<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>${workspaceRoot}<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>deviceName<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>*<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>sourceMaps<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>iOS - Launch localhost with sourcemaps via Tunnel<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>ios<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>request<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>launch<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>port<span class="pl-pds">"</span></span>: <span class="pl-c1">9222</span>,
+            <span class="pl-s"><span class="pl-pds">"</span>webRoot<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>${workspaceRoot}<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>deviceName<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>*<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>sourceMaps<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+            <span class="pl-s"><span class="pl-pds">"</span>tunnelPort<span class="pl-pds">"</span></span>: <span class="pl-c1">8080</span>
+        }
+    ]
+}</pre></div>
+
+<h4>
+<a id="attach" class="anchor" href="#attach" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Attach</h4>
+
+<p>Attach to an already running browser tab in Safari by using the <code>url</code> to match the correct tab</p>
+
+<p>An example <code>launch.json</code> config.</p>
+
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>version<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.1.0<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>configurations<span class="pl-pds">"</span></span>: [
+      {
+          <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>iOS - Attach<span class="pl-pds">"</span></span>,
+          <span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>ios<span class="pl-pds">"</span></span>,
+          <span class="pl-s"><span class="pl-pds">"</span>request<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>attach<span class="pl-pds">"</span></span>,
+          <span class="pl-s"><span class="pl-pds">"</span>port<span class="pl-pds">"</span></span>: <span class="pl-c1">9222</span>,
+          <span class="pl-s"><span class="pl-pds">"</span>sourceMaps<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+          <span class="pl-s"><span class="pl-pds">"</span>url<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://dev.domain.com/<span class="pl-pds">"</span></span>,
+          <span class="pl-s"><span class="pl-pds">"</span>webRoot<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>${workspaceRoot}<span class="pl-pds">"</span></span>,
+          <span class="pl-s"><span class="pl-pds">"</span>deviceName<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>*<span class="pl-pds">"</span></span>
+      }
+    ]
+}</pre></div>
+
+<h4>
+<a id="other-optional-launch-config-fields" class="anchor" href="#other-optional-launch-config-fields" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Other optional launch config fields</h4>
+
+<ul>
+<li>
+<code>diagnosticLogging</code>: When true, the adapter logs its own diagnostic info to the console</li>
+<li>
+<code>deviceName</code>: The name of the devices, if multiple devices are connected. <code>*</code> matches any device.</li>
+<li>
+<code>tunnelPort</code>: Port to be tunnel via local HTTP port. Usually the <code>port</code> your developer server is running on.</li>
+</ul>
+
+<h2>
+<a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Troubleshooting</h2>
+
+<p>Please have a look at <a href="https://github.com/Microsoft/vscode-chrome-debug/">vscode-chrome-debug</a> for additional troubleshooting and options.</p>
+
+<h1></h1>
+
+<p>This project has adopted the <a href="https://opensource.microsoft.com/codeofconduct/">Microsoft Open Source Code of Conduct</a>. For more information see the <a href="https://opensource.microsoft.com/codeofconduct/faq/">Code of Conduct FAQ</a> or contact <a href="mailto:opencode@microsoft.com">opencode@microsoft.com</a> with any additional questions or comments.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/YOTOV-LIMITED/vscode-ios-web-debug">Vscode-ios-web-debug</a> is maintained by <a href="https://github.com/YOTOV-LIMITED">YOTOV-LIMITED</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
